@@ -78,24 +78,26 @@ app-name/
 - Free version must work for browsing without sign-in
 - Template: github.com/freeappstore-online/template-connected
 
-### Compliance Checks (automated)
-These run on every push to main:
+### Compliance Checks (automated on every push to main)
 1. Build passes (`pnpm build`)
-2. MIT license exists
-3. No tracking dependencies or code
-4. Manrope + Fraunces fonts in CSS
-5. CSS variables (--paper, --ink, --accent) present
-6. PWA manifest.json exists
-7. "freeappstore.online" link in source
-8. Dark mode support
-9. pnpm workspace structure
-10. Bundle < 300KB gzipped
+2. MIT LICENSE file exists
+3. No .env.production in repo (env vars are in CF Pages settings)
+4. No tracking dependencies or code
+5. Manrope + Fraunces fonts in CSS
+6. CSS variables (--paper, --ink, --accent) present
+7. HTML meta tags (lang, viewport, title)
+8. PWA manifest.json (name, display, start_url)
+9. PWA meta tags (apple-mobile-web-app-capable)
+10. "freeappstore.online" link in source
+11. Dark mode support (prefers-color-scheme, data-theme, or color-scheme)
+12. pnpm workspace structure
+13. Bundle < 300KB gzipped
 
-### Publishing Workflow
-1. Build app using template
-2. Submit at github.com/freeappstore-online/submissions
-3. Review (48h response)
-4. Approved → repo transferred to org → CF Pages project created → live at appname.freeappstore.online
+### Local Compliance Check
+Run before pushing to catch issues early:
+```bash
+curl -s https://raw.githubusercontent.com/freeappstore-online/ops/main/scripts/check-compliance.sh | bash
+```
 
 ### Commands for Development
 ```bash
@@ -103,6 +105,20 @@ pnpm dev          # Start dev server
 pnpm build        # Production build
 pnpm preview      # Preview production build
 ```
+
+### Publishing Workflow
+1. Use template: `gh repo create freeappstore-online/appname --template freeappstore-online/template-standalone --public`
+2. Replace APPNAME placeholder throughout
+3. Build your app
+4. Run compliance check locally
+5. Submit at github.com/freeappstore-online/submissions
+6. Review (48h response)
+7. Approved → published at appname.freeappstore.online
+
+### Environment Variables
+- Deployment env vars (Firebase config etc.) go in CF Pages project settings — NEVER in the repo
+- Developers use `.env` locally (gitignored) for their own dev project
+- `.env.production` must NOT exist in the repo
 
 ### Do NOT
 - Add dev/staging environments
@@ -112,4 +128,4 @@ pnpm preview      # Preview production build
 - Use npm or yarn (pnpm only)
 - Use Next.js, Nuxt, or any SSR framework
 - Create server-side APIs (use Firebase/Supabase)
-- Add CLAUDE.md to the repo (skills are external)
+- Commit .env.production files (env vars are centralized in CF Pages)
