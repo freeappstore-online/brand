@@ -305,7 +305,7 @@ Before an app is listed on FreeAppStore, it must meet ALL of these:
 - [ ] PWA-installable — manifest, service worker, proper meta tags
 - [ ] Private — zero data leaves the device
 - [ ] Follows brand guidelines — fonts, colors, layout, components
-- [ ] Open source — MIT license, public repo on freeapps-online org
+- [ ] Open source — MIT license, public repo on freeappstore-online org
 - [ ] Unique category — no existing app serves the same purpose
 - [ ] Performance — loads in <2s on 3G, <100KB JS gzipped for core
 - [ ] Accessible — keyboard navigable, proper ARIA labels, contrast ratios
