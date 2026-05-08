@@ -2,7 +2,7 @@
 
 ## Mission
 
-FreeAppStore is a platform of beautiful, free-forever web apps. Every app is private, offline-capable, and works on any device. One app per category — no duplicates, no fragmentation.
+FreeAppStore is an open platform for free, high-quality web applications — no ads, no paywalls, no subscriptions, no catch. Everything we build and host is 100% free, forever. Every app is private, offline-capable, and works on any device. One app per category — no duplicates, no fragmentation.
 
 ## Platform Rules
 
