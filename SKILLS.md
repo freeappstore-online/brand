@@ -94,7 +94,7 @@ app-name/
 ### Local Compliance Check
 Run before pushing to catch issues early:
 ```bash
-curl -s https://raw.githubusercontent.com/freeappstore-online/ops/main/scripts/check-compliance.sh | bash
+fas check
 ```
 
 ### Commands for Development
