@@ -4,7 +4,7 @@ Point your Claude Code or Codex to this file for platform-aware development.
 
 **Add to your CLAUDE.md or agent config:**
 ```
-See https://raw.githubusercontent.com/freeappstore-online/ops/main/SKILLS.md for platform skills.
+See https://freeappstore.online/skills.md for platform skills.
 ```
 
 ---
@@ -16,7 +16,7 @@ You are building an app for FreeAppStore (freeappstore.online). Follow these rul
 ### Platform Rules
 - ONE environment: production only. Push to `main` = deploy. No staging, no rollbacks. Fix forward.
 - Static hosting on Cloudflare Pages. No server-side code.
-- Backend (if needed): Firebase or Supabase only.
+- Backend (if needed): `@freeappstore/sdk` (auth, KV, rooms, proxy).
 - Free means free forever. No monetization in the free version.
 - One app per category. Check freeappstore.online for taken categories.
 
@@ -60,7 +60,7 @@ app-name/
 ### Privacy Rules
 - ZERO analytics, tracking, cookies
 - No Google Analytics, Amplitude, Mixpanel, Segment, Hotjar, PostHog, Sentry
-- All user data in localStorage (standalone) or Firebase (connected)
+- All user data in localStorage (standalone) or `@freeappstore/sdk` KV (connected)
 - No third-party scripts except Google Fonts CDN
 
 ### App Types
@@ -71,12 +71,10 @@ app-name/
 - Works fully offline
 - Template: github.com/freeappstore-online/template-standalone
 
-**Connected** (shared backend):
-- Firebase/Supabase for data
-- Free + Pro versions share same backend
-- Feature gating via user roles in Firestore rules
+**Connected** (platform SDK):
+- `@freeappstore/sdk` for auth, KV storage, realtime rooms, API proxy
 - Free version must work for browsing without sign-in
-- Template: github.com/freeappstore-online/template-connected
+- Start from template-standalone, add `npm i @freeappstore/sdk`
 
 ### Compliance Checks (automated on every push to main)
 1. Build passes (`pnpm build`)
@@ -116,7 +114,7 @@ pnpm preview      # Preview production build
 7. Approved → published at appname.freeappstore.online
 
 ### Environment Variables
-- Deployment env vars (Firebase config etc.) go in CF Pages project settings — NEVER in the repo
+- Deployment env vars go in CF Pages project settings — NEVER in the repo
 - Developers use `.env` locally (gitignored) for their own dev project
 - `.env.production` must NOT exist in the repo
 
@@ -127,5 +125,5 @@ pnpm preview      # Preview production build
 - Add monetization to free version
 - Use npm or yarn (pnpm only)
 - Use Next.js, Nuxt, or any SSR framework
-- Create server-side APIs (use Firebase/Supabase)
+- Create server-side APIs (use `@freeappstore/sdk` for backend features)
 - Commit .env.production files (env vars are centralized in CF Pages)
